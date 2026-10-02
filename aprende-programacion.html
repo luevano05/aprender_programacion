@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aprende Programación de Forma Interactiva</title>
+<style>
+:root{--bg:#f6f7f9;--sf:#fff;--tx:#1b2430;--mu:#5b6675;--bd:#dde1e7;--ac:#2f4ed1;--ok:#16794a;--bad:#b42318;--hi:#e8edff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e131b;--sf:#151c27;--tx:#e6ebf2;--mu:#9aa6b6;--bd:#2a3443;--ac:#8ca3ff;--ok:#4cc38a;--bad:#ff8a80;--hi:#1f2b4d}}
+:root[data-theme="dark"]{--bg:#0e131b;--sf:#151c27;--tx:#e6ebf2;--mu:#9aa6b6;--bd:#2a3443;--ac:#8ca3ff;--ok:#4cc38a;--bad:#ff8a80;--hi:#1f2b4d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+aside{background:var(--sf);border-right:1px solid var(--bd);padding:18px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+aside h2{font-size:17px;margin:0 8px 16px}aside small{display:block;color:var(--mu);margin:14px 8px 4px;text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.nav{display:flex;width:100%;gap:8px;align-items:center;text-align:left;background:none;border:0;border-radius:8px;padding:9px 10px;color:var(--tx)}
+.nav:hover{background:var(--hi)}.nav.on{background:var(--hi);font-weight:700;box-shadow:inset 3px 0 var(--ac)}.nav.lock{color:var(--mu);cursor:not-allowed}
+.top{display:flex;gap:10px;align-items:center;padding:12px 24px;border-bottom:1px solid var(--bd);background:var(--sf);position:sticky;top:0;z-index:5}
+.top input{flex:1;max-width:420px;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.chip{border:1px solid var(--bd);border-radius:99px;padding:4px 12px;font-size:14px;background:var(--bg)}
+main{padding:24px;max-width:1100px;width:100%;margin:auto}h1{margin:0 0 4px;font-size:28px}h3{margin:0 0 8px}h4{margin:14px 0 6px;font-size:13px;color:var(--mu);text-transform:uppercase;letter-spacing:.05em}.mu{color:var(--mu)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:18px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.grid .card{margin:0}.big{font-size:30px;font-weight:700}
+.pb{height:10px;background:var(--bd);border-radius:9px;overflow:hidden;margin:8px 0}.pb i{display:block;height:100%;background:var(--ac);transition:width .6s}
+.b{border:1px solid var(--bd);background:var(--sf);border-radius:8px;padding:8px 13px}.b:hover{border-color:var(--ac)}.b.p{background:var(--ac);color:#fff;border-color:var(--ac)}:root[data-theme="dark"] .b.p{color:#0e131b}
+.lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--bd)}
+.pl .bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.pl{margin:6px 0}.pg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px}
+.ed{position:relative;background:#0f1724;border-radius:10px;overflow:hidden;font:14px/22px ui-monospace,Menlo,Consolas,monospace}
+.ed pre,.ed textarea{margin:0;width:100%;font:inherit;line-height:22px;white-space:pre;overflow:auto;border:0;position:absolute;inset:0}
+.ed pre{overflow:hidden;padding:10px 0;color:#d7e0ee;pointer-events:none}.ed textarea{background:transparent;color:transparent;caret-color:#fff;padding:10px 10px 10px 48px;resize:none}
+.ln{position:relative;padding:0 10px 0 48px;min-height:22px;border-left:3px solid transparent}.ln i{position:absolute;left:0;width:36px;text-align:right;color:#6b7a90;font-style:normal}
+.ln.cur{background:rgba(122,162,255,.25);border-left-color:#8ca3ff}.ln.cur i{color:#fff;font-weight:700}.k{color:#7aa2ff}.s{color:#8fd19e}.n{color:#f0b57d}.c{color:#7d8aa0}
+.note{background:var(--hi);border-radius:8px;padding:10px 12px;min-height:56px}.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}.flow em{font-style:normal;color:var(--mu)}
+.chip.on{background:var(--ac);color:#fff;font-weight:700;border-color:var(--ac)}:root[data-theme="dark"] .chip.on{color:#0e131b}
+.vars{display:flex;flex-wrap:wrap;gap:10px;min-height:70px}.box{border:2px solid var(--ac);border-radius:10px;min-width:110px;overflow:hidden;text-align:center;background:var(--sf)}
+.box b{display:block;background:var(--ac);color:#fff;padding:2px 10px;font-size:13px}:root[data-theme="dark"] .box b{color:#0e131b}.box span{display:block;padding:8px 10px;font:700 20px ui-monospace,monospace}.box div{padding:3px 10px;font:14px ui-monospace,monospace;text-align:left}
+.flash{animation:pop .7s}@keyframes pop{0%{transform:scale(.8);background:var(--hi)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.flash{animation:none}}
+.con{background:#0f1724;color:#d7e0ee;border-radius:8px;padding:10px;min-height:60px;margin:0;font:14px/1.5 ui-monospace,monospace;white-space:pre-wrap}
+.code{background:#0f1724;color:#d7e0ee;border-radius:8px;padding:10px;font:14px ui-monospace,monospace;overflow:auto}
+.opts{display:grid;gap:8px;margin:10px 0}.opt{text-align:left;font-family:ui-monospace,monospace}.ok{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}.hint{margin-top:8px;color:var(--mu)}
+#menu{display:none}
+@media(max-width:860px){.app{grid-template-columns:1fr}aside{position:fixed;z-index:20;width:270px;transform:translateX(-100%);transition:transform .25s}aside.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.4)}#menu{display:inline-block}.pg{grid-template-columns:1fr}.top{padding:10px 12px}main{padding:14px}h1{font-size:23px}}
+</style>
+</head>
+<body><div class="app" id="app"></div>
+<script>
+const $=(s,r=document)=>r.querySelector(s),esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmt=v=>typeof v==='string'?`"${v}"`:String(v),str=v=>typeof v==='boolean'?(v?'True':'False'):String(v);
+const hi=t=>esc(t).replace(/("[^"]*")|(\/\/.*)|\b(int|string|double|bool|var|if|else|for|while|class|public|new|true|false)\b|\b(\d+)\b/g,(m,s,c,k)=>s?`<span class=s>${m}</span>`:c?`<span class=c>${m}</span>`:k?`<span class=k>${m}</span>`:`<span class=n>${m}</span>`);
+
+/* ---------- Motor: intérprete C# mínimo y seguro (sin eval, sin acceso al sistema) ---------- */
+const TYPES=['int','string','double','bool','var'];
+function parse(src){
+  const T=[];src.split('\n').forEach((ln,i)=>{for(const m of ln.matchAll(/\d+\.?\d*|"[^"]*"|[A-Za-z_]\w*|\+\+|--|\+=|-=|>=|<=|==|!=|&&|\|\||[-+*\/%<>=!(){};,.]/g))T.push({v:m[0],l:i+1})});
+  let p=0;const pk=()=>T[p]&&T[p].v,nx=()=>T[p++];
+  const ex=v=>{if(pk()!==v)throw Error(`Se esperaba "${v}" cerca de la línea ${(T[p-1]||T[p]||{l:1}).l}. Revisa si olvidaste ese símbolo.`);return nx()};
+  const PR={'||':1,'&&':2,'==':3,'!=':3,'<':4,'>':4,'<=':4,'>=':4,'+':5,'-':5,'*':6,'/':6,'%':6};
+  function prim(){const t=nx();if(!t)throw Error('La expresión está incompleta.');const v=t.v;
+    if(v==='('){const e=expr(0);ex(')');return e}
+    if(v==='!'||v==='-')return{k:'u',op:v,e:prim()};
+    if(/^\d/.test(v))return{k:'n',v:+v};if(v[0]==='"')return{k:'n',v:v.slice(1,-1)};
+    if(v==='true'||v==='false')return{k:'n',v:v==='true'};
+    if(/^[A-Za-z_]/.test(v))return{k:'v',n:v,l:t.l};
+    throw Error(`Símbolo inesperado "${v}" en la línea ${t.l}.`)}
+  function expr(m){let a=prim();while(PR[pk()]>m){const op=nx().v;a={k:'b',op,a,b:expr(PR[op])}}return a}
+  const cond=()=>{ex('(');const s=p,c=expr(0);const cs=T.slice(s,p).map(x=>x.v).join(' ');ex(')');return[c,cs]};
+  function simple(){const t=T[p];if(!t)throw Error('El programa termina antes de lo esperado.');const l=t.l,v=t.v;
+    if(TYPES.includes(v)){nx();const n=nx().v;ex('=');return{k:'decl',n,e:expr(0),l}}
+    if(v==='Console'){nx();ex('.');nx();ex('(');const e=expr(0);ex(')');return{k:'out',e,l}}
+    if(/^[A-Za-z_]/.test(v)){nx();const o=pk();nx();const me={k:'v',n:v,l};
+      if(o==='++'||o==='--')return{k:'set',n:v,l,e:{k:'b',op:o[0],a:me,b:{k:'n',v:1}}};
+      if(o==='+='||o==='-=')return{k:'set',n:v,l,e:{k:'b',op:o[0],a:me,b:expr(0)}};
+      if(o==='=')return{k:'set',n:v,e:expr(0),l}}
+    throw Error(`No entiendo la instrucción de la línea ${l}.`)}
+  function stmt(){const t=T[p];if(!t)throw Error('Falta una instrucción o un "}".');const v=t.v,l=t.l;
+    if(v==='{'){nx();const b=[];while(pk()!=='}'){if(p>=T.length)throw Error('Falta cerrar una llave "}".');b.push(stmt())}nx();return{k:'blk',b,l}}
+    if(v==='if'){nx();const[c,cs]=cond(),a=stmt();let e=null;if(pk()==='else'){nx();e=stmt()}return{k:'if',c,cs,a,e,l}}
+    if(v==='while'){nx();const[c,cs]=cond();return{k:'while',c,cs,b:stmt(),l}}
+    if(v==='for'){nx();ex('(');const i=simple();ex(';');const s=p,c=expr(0),cs=T.slice(s,p).map(x=>x.v).join(' ');ex(';');const u=simple();ex(')');return{k:'for',i,c,cs,u,b:stmt(),l}}
+    const s=simple();ex(';');return s}
+  const prog=[];while(p<T.length)prog.push(stmt());return prog}
+function ev(e,env){switch(e.k){case'n':return e.v;
+  case'v':if(!(e.n in env))throw Error(`La variable "${e.n}" no existe (línea ${e.l}). ¿La declaraste antes de usarla?`);return env[e.n];
+  case'u':{const x=ev(e.e,env);return e.op==='!'?!x:-x}
+  case'b':{const a=ev(e.a,env),b=ev(e.b,env);switch(e.op){case'+':return a+b;case'-':return a-b;case'*':return a*b;
+    case'/':if(b===0)throw Error('División entre cero.');return Number.isInteger(a)&&Number.isInteger(b)?Math.trunc(a/b):a/b;
+    case'%':return a%b;case'<':return a<b;case'>':return a>b;case'<=':return a<=b;case'>=':return a>=b;case'==':return a===b;case'!=':return a!==b;case'&&':return a&&b;case'||':return a||b}}}}
+function* run(prog,env,out){
+  function* ex(s,tag){switch(s.k){
+    case'blk':for(const x of s.b)yield*ex(x);break;
+    case'decl':case'set':{if(s.k==='set'&&!(s.n in env))throw Error(`La variable "${s.n}" no existe (línea ${s.l}).`);const val=ev(s.e,env),nw=!(s.n in env);env[s.n]=val;
+      yield{l:s.l,t:tag||s.k,n:s.n,note:`${nw?'Se crea':'Se actualiza'} la variable ${s.n} con el valor ${fmt(val)}.`};break}
+    case'out':{const v=str(ev(s.e,env));out.push(v);yield{l:s.l,t:'out',note:`Se imprime en la consola: ${v}`};break}
+    case'if':{const c=ev(s.c,env);yield{l:s.l,t:'cond',note:`¿${s.cs}? → ${c?'verdadero ✓. Entra al bloque if.':'falso ✗. '+(s.e?'Va al bloque else.':'Se salta el bloque.')}`};if(c)yield*ex(s.a);else if(s.e)yield*ex(s.e);break}
+    case'while':while(true){const c=ev(s.c,env);yield{l:s.l,t:'cond',note:`¿${s.cs}? → ${c?'verdadero ✓. Se ejecuta el cuerpo.':'falso ✗. El ciclo termina.'}`};if(!c)break;yield*ex(s.b)}break;
+    case'for':yield*ex(s.i,'init');while(true){const c=ev(s.c,env);yield{l:s.l,t:'cond',note:`¿${s.cs}? → ${c?'verdadero ✓. Se ejecuta el cuerpo.':'falso ✗. El ciclo termina.'}`};if(!c)break;yield*ex(s.b);yield*ex(s.u,'inc')}break}}
+  for(const s of prog)yield*ex(s)}
+function trace(src){const steps=[];try{const env=Object.create(null),out=[];for(const s of run(parse(src),env,out)){steps.push({...s,vars:{...env},out:[...out]});if(steps.length>400)throw Error('El programa parece no terminar (¿ciclo infinito?). Se detuvo tras 400 pasos.')}return{steps}}catch(e){return{steps,error:e.message}}}
+
+/* ---------- Estado y progreso (local; listo para conectar a un backend) ---------- */
+const load=()=>{try{return JSON.parse(localStorage.getItem('aprende')||'{}')}catch{return{}}};
+const S={view:'home',q:'',...load()};S.xp??=120;S.done??={};S.name='Alumno';S.theme??=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+const save=()=>{try{localStorage.setItem('aprende',JSON.stringify({xp:S.xp,done:S.done,theme:S.theme,ran:S.ran}))}catch{}};
+const TOTAL=12,lvl=()=>1+Math.floor(S.xp/300),pct=()=>Math.round(Object.keys(S.done).length/TOTAL*100);
+
+/* ---------- Contenido educativo ---------- */
+const LESSONS={
+ var:{title:'¿Qué es una variable?',flow:[['Declarar',['decl']],['Cambiar',['set']],['Mostrar',['out']]],
+  explain:'Una variable es un espacio donde un programa puede almacenar información. Tiene un nombre (para encontrarla) y un valor (lo que guarda). El valor puede cambiar mientras el programa se ejecuta.',
+  real:'Imagina una caja con la etiqueta «EDAD». Dentro guardas el 20. Si después guardas 25, sacas el 20 y metes el 25: la caja es la misma, solo cambió su contenido.',
+  tech:'int edad = 20; declara una variable de tipo int (entero) llamada edad y le asigna 20. El símbolo = asigna; no compara.',
+  code:'int edad = 20;\nedad = 25;\nConsole.WriteLine(edad);',
+  challenge:'Edita el código: agrega string nombre = "Ana"; y muéstralo con Console.WriteLine(nombre);',
+  ex:{xp:60,q:'¿Qué valor tendrá edad después de ejecutar este código?',code:'int edad = 20;\nedad = 25;\nedad++;',
+   opts:[['20','Ese es el valor inicial, pero luego se reemplaza.'],['25','Es el valor tras la segunda línea; falta considerar edad++.'],['26','edad++ suma 1 al valor actual (25).'],['21','edad++ suma 1, pero al valor actual (25), no al inicial.']],ans:2,
+   hints:['Sigue el código línea por línea, como si fueras la computadora.','La segunda línea reemplaza el 20.','edad++ significa «súmale 1 a edad».'],
+   steps:['int edad = 20; → edad vale 20','edad = 25; → se reemplaza el 20; edad vale 25','edad++; → se suma 1; edad vale 26']}},
+ for:{title:'¿Cómo funciona un ciclo for?',flow:[['Inicio',['init']],['Condición',['cond']],['Cuerpo',['out','set','decl']],['Incremento',['inc']]],
+  explain:'Un ciclo for repite instrucciones. Tiene tres partes: inicio (int i = 0), condición (i < 5) y avance (i++). Mientras la condición sea verdadera, se repite el cuerpo.',
+  real:'Como dar 5 vueltas a una pista: empiezas en la vuelta 0, preguntas «¿ya di 5?», si no, das otra vuelta y sumas 1 al contador.',
+  tech:'El orden es: inicio (una vez) → condición → cuerpo → incremento → condición → ... hasta que la condición sea falsa.',
+  code:'for (int i = 0; i < 5; i++)\n{\n    Console.WriteLine(i);\n}',
+  challenge:'Cambia i < 5 por i < 3, o i++ por i += 2. Predice la salida antes de ejecutar.',
+  ex:{xp:80,q:'¿Qué imprimirá este código?',code:'for (int i = 0; i < 3; i++)\n{\n    Console.WriteLine(i);\n}',
+   opts:[['0 1 2','Correcto: empieza en 0 y se detiene cuando i vale 3.'],['1 2 3','i empieza en 0, no en 1.'],['0 1 2 3','Cuando i vale 3 la condición i < 3 es falsa y el ciclo ya no entra.'],['1 2','i empieza en 0, así que el 0 sí se imprime.']],ans:0,
+   hints:['¿Con qué valor empieza i?','¿Se imprime cuando i vale 3?','La condición es i < 3 (estrictamente menor).'],
+   steps:['i = 0 → ¿0 < 3? sí → imprime 0','i = 1 → ¿1 < 3? sí → imprime 1','i = 2 → ¿2 < 3? sí → imprime 2','i = 3 → ¿3 < 3? no → termina']}},
+ poo:{title:'Clases, objetos y constructores',flow:[['Clase',['cls']],['new',['new']],['Constructor',['ctor']],['Objeto',['obj']]],
+  explain:'Una clase es una plantilla que describe qué datos (atributos) tendrá algo. Un objeto es una copia concreta creada a partir de esa plantilla. El constructor es el método especial que da sus valores iniciales al objeto.',
+  real:'La clase es el molde de una galleta; los objetos son las galletas. Cada una puede tener su propio sabor, pero todas salen del mismo molde.',
+  tech:'new Persona("Jorge", 20) reserva memoria, ejecuta el constructor y devuelve una referencia al objeto, que se guarda en persona1.',
+  code:'class Persona\n{\n    public string Nombre;\n    public int Edad;\n    public Persona(string nombre, int edad)\n    {\n        Nombre = nombre;\n        Edad = edad;\n    }\n}\n\nPersona persona1 = new Persona("Jorge", 20);',
+  script:[{l:1,t:'cls',note:'CLASE: Persona es solo un plano. Todavía no existe ninguna persona.',vars:{},out:[]},
+   {l:12,t:'new',note:'new: C# reserva espacio en memoria para un objeto nuevo.',vars:{},out:[]},
+   {l:5,t:'ctor',note:'CONSTRUCTOR: new lo llama con nombre="Jorge" y edad=20. Objeto vacío por ahora.',vars:{'(objeto nuevo)':{Nombre:'—',Edad:0}},out:[]},
+   {l:7,t:'ctor',note:'Nombre = nombre → el atributo Nombre recibe "Jorge".',vars:{'(objeto nuevo)':{Nombre:'"Jorge"',Edad:0}},out:[]},
+   {l:8,t:'ctor',note:'Edad = edad → el atributo Edad recibe 20.',vars:{'(objeto nuevo)':{Nombre:'"Jorge"',Edad:20}},out:[]},
+   {l:12,t:'obj',note:'OBJETO creado: su referencia se guarda en la variable persona1.',vars:{persona1:{Nombre:'"Jorge"',Edad:20}},out:[]}],
+  challenge:'Este ejemplo es una animación guiada. Avanza paso a paso y observa cómo los datos viajan del constructor al objeto.',
+  ex:{xp:100,q:'¿Qué ocurre al ejecutar new Persona("Ana", 19)?',opts:[['Se crea un objeto Persona y se ejecuta su constructor','Correcto: new crea el objeto y el constructor le da sus valores.'],['Se modifica la clase Persona','La clase no cambia; es solo la plantilla.'],['Se crea una nueva clase llamada Ana','Ana es un valor (dato), no una clase.'],['No pasa nada hasta llamar a un método','El constructor se ejecuta automáticamente al usar new.']],ans:0,
+   hints:['Piensa en el molde de galletas.','new construye algo concreto a partir de la clase.','¿Quién da los valores iniciales? El constructor.'],
+   steps:['new reserva memoria para un objeto','El constructor recibe "Ana" y 19','Asigna Nombre = "Ana" y Edad = 19','Se devuelve la referencia al objeto']}},
+ cond:{title:'Condicionales: if y else',flow:[['Declarar',['decl']],['¿Condición?',['cond']],['Resultado',['out']]],
+  explain:'Un condicional permite que el programa decida. Hace una pregunta de sí o no (verdadero o falso) y ejecuta un bloque u otro según la respuesta.',
+  real:'Como en la entrada de un cine: si tienes 18 años o más, pasas a la función; si no, te sugieren otra sala.',
+  tech:'if (condición) { ... } else { ... }. La condición es una expresión booleana; los operadores >=, <, ==, && y || la construyen.',
+  code:'int edad = 20;\nif (edad >= 18)\n{\n    Console.WriteLine("Mayor de edad");\n}\nelse\n{\n    Console.WriteLine("Menor de edad");\n}',
+  challenge:'Cambia edad a 16 y ejecuta paso a paso: observa que el programa salta al bloque else.',
+  ex:{xp:80,q:'¿Qué imprimirá este código?',code:'int edad = 16;\nif (edad >= 18)\n    Console.WriteLine("Mayor");\nelse\n    Console.WriteLine("Menor");',
+   opts:[['Mayor','16 >= 18 es falso, así que no entra al if.'],['Menor','Correcto: la condición es falsa y se ejecuta el else.'],['Mayor y Menor','Solo se ejecuta uno de los dos bloques, nunca ambos.'],['Nada','Siempre se ejecuta el if o el else.']],ans:1,
+   hints:['Evalúa primero la condición con edad = 16.','¿16 es mayor o igual que 18?','Si es falsa, el programa va al else.'],
+   steps:['edad = 16','¿16 >= 18? → falso','Se salta el if y se ejecuta el else','Imprime Menor']}},
+ her:{title:'Herencia',flow:[['Clase padre',['cls']],['Herencia',['her']],['Objeto',['obj']]],
+  explain:'La herencia permite que una clase (hija) reutilice los atributos y métodos de otra (padre) y agregue los suyos, sin copiar código.',
+  real:'Un hijo hereda rasgos de sus padres, pero también tiene los suyos. Todo Estudiante es una Persona, y además tiene matrícula.',
+  tech:'class Estudiante : Persona indica que Estudiante hereda de Persona. Los miembros públicos del padre están disponibles en la hija.',
+  code:'class Persona\n{\n    public string Nombre;\n}\nclass Estudiante : Persona\n{\n    public int Matricula;\n}\nEstudiante e = new Estudiante();\ne.Nombre = "Ana";\ne.Matricula = 101;',
+  script:(()=>{const P={Persona:{Nombre:'string'}},E={Estudiante:{'Nombre (heredado)':'string',Matricula:'int'}};return[
+   {l:1,t:'cls',note:'Clase padre: Persona define el atributo Nombre.',vars:{...P},out:[]},
+   {l:5,t:'her',note:'Estudiante : Persona → hereda Nombre y además agrega Matricula.',vars:{...P,...E},out:[]},
+   {l:9,t:'obj',note:'Se crea un Estudiante: ya trae Nombre aunque no se escribió en su clase.',vars:{...P,...E,e:{Nombre:'—',Matricula:0}},out:[]},
+   {l:10,t:'obj',note:'Se asigna el atributo heredado Nombre.',vars:{...P,...E,e:{Nombre:'"Ana"',Matricula:0}},out:[]},
+   {l:11,t:'obj',note:'Se asigna el atributo propio Matricula.',vars:{...P,...E,e:{Nombre:'"Ana"',Matricula:101}},out:[]}]})(),
+  challenge:'Animación guiada: avanza y observa de dónde viene cada atributo del objeto e.',
+  ex:{xp:100,q:'Si Estudiante hereda de Persona y Persona tiene Nombre, ¿puede un objeto Estudiante usar Nombre?',opts:[['Sí, lo hereda de Persona','Correcto: la hija recibe los miembros públicos del padre.'],['No, debe declararlo otra vez','Justamente la herencia evita repetir código.'],['Solo si Persona tiene un objeto','Los atributos se heredan por la clase, no por los objetos del padre.'],['Solo en C++','C# también soporta herencia.']],ans:0,
+   hints:['Piensa en «Estudiante es una Persona».','¿Para qué sirve heredar?','Reutilizar lo que el padre ya define.'],
+   steps:['Estudiante : Persona establece la relación','Estudiante recibe Nombre del padre','Puede agregar atributos propios, como Matricula']}},
+ pol:{title:'Polimorfismo',flow:[['Variable Animal',['new']],['Llamada',['call']],['Resultado',['out']]],
+  explain:'Polimorfismo significa «muchas formas»: el mismo método se comporta distinto según el objeto real que lo ejecuta.',
+  real:'Dices «haz tu sonido» a un perro y a un gato: la orden es la misma, pero cada uno responde a su manera.',
+  tech:'Con virtual en el padre y override en las hijas, C# decide en tiempo de ejecución qué versión llamar según el tipo real del objeto.',
+  code:'class Animal\n{\n    public virtual void Sonido() { Console.WriteLine("..."); }\n}\nclass Perro : Animal\n{\n    public override void Sonido() { Console.WriteLine("Guau"); }\n}\nclass Gato : Animal\n{\n    public override void Sonido() { Console.WriteLine("Miau"); }\n}\nAnimal a1 = new Perro();\nAnimal a2 = new Gato();\na1.Sonido();\na2.Sonido();',
+  script:(()=>{const A={a1:{Tipo:'Animal',Objeto:'Perro'}},B={a2:{Tipo:'Animal',Objeto:'Gato'}};return[
+   {l:13,t:'new',note:'La variable es de tipo Animal, pero guarda un objeto Perro.',vars:{...A},out:[]},
+   {l:14,t:'new',note:'a2 también es Animal, pero guarda un Gato.',vars:{...A,...B},out:[]},
+   {l:15,t:'call',note:'a1.Sonido(): C# mira el objeto REAL (Perro) y elige su versión.',vars:{...A,...B},out:[]},
+   {l:7,t:'out',note:'Se ejecuta Perro.Sonido() → imprime Guau.',vars:{...A,...B},out:['Guau']},
+   {l:16,t:'call',note:'a2.Sonido(): misma llamada, pero el objeto real es Gato.',vars:{...A,...B},out:['Guau']},
+   {l:11,t:'out',note:'Se ejecuta Gato.Sonido() → imprime Miau.',vars:{...A,...B},out:['Guau','Miau']}]})(),
+  challenge:'Animación guiada: observa que la llamada Sonido() es idéntica, pero el resultado cambia.',
+  ex:{xp:100,q:'Animal x = new Gato(); x.Sonido(); ¿Qué versión de Sonido se ejecuta?',opts:[['La de Animal','La variable es Animal, pero lo que importa es el objeto real.'],['La de Gato','Correcto: con override se usa la versión del tipo real del objeto.'],['Las dos','Solo se ejecuta una versión.'],['Ninguna','El método existe y se ejecuta.']],ans:1,
+   hints:['¿Qué objeto se creó con new?','El tipo de la variable no decide; el objeto real sí.','override reemplaza el comportamiento del padre.'],
+   steps:['x guarda un objeto Gato','Se llama x.Sonido()','C# busca la versión en el tipo real: Gato','Se ejecuta Gato.Sonido()']}},
+ int:{title:'Interfaces',flow:[['Contrato',['cls']],['Implementación',['impl']]],
+  explain:'Una interfaz es un contrato: lista los métodos que una clase debe tener, pero no dice cómo funcionan. Cada clase decide su implementación.',
+  real:'Como el enchufe de una pared: define la forma que debe tener cualquier aparato para conectarse, sin importar si es lámpara o cargador.',
+  tech:'interface IAnimal declara Sonido(). class Perro : IAnimal obliga a Perro a implementar Sonido(). Una clase puede implementar varias interfaces.',
+  code:'interface IAnimal\n{\n    void Sonido();\n}\nclass Perro : IAnimal\n{\n    public void Sonido() { Console.WriteLine("Guau"); }\n}\nclass Gato : IAnimal\n{\n    public void Sonido() { Console.WriteLine("Miau"); }\n}',
+  script:(()=>{const I={IAnimal:{'Sonido()':'sin código'}};return[
+   {l:1,t:'cls',note:'INTERFACE: IAnimal promete que quien la use tendrá Sonido(), sin decir cómo.',vars:{...I},out:[]},
+   {l:5,t:'impl',note:'Perro firma el contrato e implementa Sonido() a su manera.',vars:{...I,Perro:{'Sonido()':'"Guau"'}},out:[]},
+   {l:9,t:'impl',note:'Gato cumple el mismo contrato con otra implementación.',vars:{...I,Perro:{'Sonido()':'"Guau"'},Gato:{'Sonido()':'"Miau"'}},out:[]}]})(),
+  challenge:'Animación guiada: observa cómo dos clases cumplen el mismo contrato de forma distinta.',
+  ex:{xp:100,q:'¿Qué define una interfaz?',opts:[['Qué métodos debe tener una clase, sin su código','Correcto: es un contrato de métodos.'],['El código completo de cada método','Eso lo hace cada clase que la implementa.'],['Los valores iniciales de un objeto','Eso lo hace el constructor.'],['Una variable global','Una interfaz no almacena datos.']],ans:0,
+   hints:['Piensa en un contrato o un enchufe.','¿Quién escribe el código del método?','La interfaz solo declara; la clase implementa.'],
+   steps:['La interfaz declara Sonido()','La clase indica : IAnimal','La clase está obligada a escribir Sonido()','Cada clase lo implementa distinto']}}};
+
+const PATH=[['Módulo 1 — Fundamentos',[[null,'¿Qué es programar?'],['var'],[null,'Tipos de datos']]],['Módulo 2 — Control de flujo',[[null,'Condicionales']]],['Módulo 3 — Ciclos',[['for']]],['Módulo 4 — Métodos',[[null,'Métodos y funciones']]],['Módulo 6 — POO',[[null,'Clases'],[null,'Objetos'],['poo'],[null,'Herencia'],[null,'Polimorfismo'],[null,'Interfaces']]]];
+const DICT=[['Variable','Una caja con nombre donde guardas un dato.','Espacio en memoria con identificador y tipo, cuyo valor puede cambiar.','int edad = 20;'],['Ciclo','Algo que se repite varias veces.','Estructura de control que ejecuta un bloque mientras se cumpla una condición.','for (int i = 0; i < 5; i++)'],['Condición','Una pregunta de sí o no que decide qué camino sigue el programa.','Expresión booleana evaluada por if/else.','if (edad >= 18)'],['Clase','El molde o plano para crear objetos.','Definición de atributos y métodos de un tipo de objeto.','class Persona { }'],['Objeto','Algo concreto creado a partir de una clase.','Instancia de una clase con su propio estado.','Persona p = new Persona("Ana", 19);'],['Constructor','La receta que da valores iniciales a un objeto nuevo.','Método especial, con el nombre de la clase, invocado por new.','public Persona(string n) { Nombre = n; }'],['Algoritmo','Una lista ordenada de pasos para resolver un problema.','Secuencia finita y no ambigua de instrucciones.','1) Leer edad 2) Comparar con 18 3) Mostrar resultado'],['Depuración','Buscar y corregir errores paso a paso.','Proceso de localizar defectos observando el estado del programa.','Ejecutar paso a paso y revisar variables']];
+
+/* ---------- Componentes ---------- */
+let stops=[];
+function Player(root,o){
+  let steps=[],err=null,i=-1,timer=null;
+  root.innerHTML=`<div class="pl"><div class="bar" role="toolbar" aria-label="Controles de ejecución"><button class="b p" data-a="run">▶ Ejecutar</button><button class="b" data-a="pause">⏸ Pausar</button><button class="b" data-a="prev">◀ Paso anterior</button><button class="b" data-a="next">Paso siguiente ▶</button><button class="b" data-a="reset">↺ Reiniciar</button></div>
+  <div class="pg"><div><div class="ed"><pre class="hl" aria-hidden="true"></pre><textarea spellcheck="false" wrap="off" aria-label="Editor de código C#" ${o.script?'readonly':''}></textarea></div></div>
+  <div><div class="flow"></div><div class="note" aria-live="polite"></div><h4>Variables</h4><div class="vars"></div><h4>Consola</h4><pre class="con"></pre></div></div></div>`;
+  const ta=$('textarea',root),hl=$('.hl',root);ta.value=o.code;
+  const stop=()=>{clearInterval(timer);timer=null};stops.push(stop);
+  function draw(){const cur=i>=0?steps[i]:null,lines=ta.value.split('\n'),h=Math.min(Math.max(lines.length,6),16)*22+20;
+    $('.ed',root).style.height=h+'px';
+    hl.innerHTML=lines.map((t,n)=>`<div class="ln${cur&&cur.l===n+1?' cur':''}"><i>${n+1}</i>${hi(t)||' '}</div>`).join('');
+    $('.flow',root).innerHTML=o.flow.map(([a,ts])=>`<span class="chip${cur&&ts.includes(cur.t)?' on':''}">${cur&&ts.includes(cur.t)?'● ':''}${a}</span>`).join('<em>→</em>');
+    const atEnd=i===steps.length-1;
+    $('.note',root).innerHTML=err&&atEnd?`<span class="bad">✗ Error: ${esc(err)}</span>`:cur?`<b>Paso ${i+1} de ${steps.length} · línea ${cur.l}.</b> ${esc(cur.note)}${atEnd&&!err?' <b>Fin del programa.</b>':''}`:'Presiona «Paso siguiente» para avanzar o «Ejecutar» para ver todo el recorrido.';
+    const v=cur?cur.vars:{},pv=i>0?steps[i-1].vars:{};
+    $('.vars',root).innerHTML=Object.keys(v).map(k=>{const x=v[k];if(typeof x==='object')return`<div class="box${JSON.stringify(pv[k])!==JSON.stringify(x)?' flash':''}"><b>${esc(k)}</b>${Object.keys(x).map(a=>`<div>${a}: ${esc(x[a])}</div>`).join('')}</div>`;
+      const ch=JSON.stringify(pv[k])!==JSON.stringify(x);return`<div class="box${ch?' flash':''}"><b>${esc(k)}</b><span>${ch&&k in pv?`<s>${esc(fmt(pv[k]))}</s> → `:''}${esc(fmt(x))}</span></div>`}).join('')||'<span class="mu">Aún no hay variables.</span>';
+    $('.con',root).textContent=cur&&cur.out.length?cur.out.join('\n'):'(sin salida todavía)'}
+  function compile(){stop();const r=o.script?{steps:o.script}:trace(ta.value);steps=r.steps;err=r.error;i=-1;draw()}
+  const go=d=>{i=Math.max(-1,Math.min(steps.length-1,i+d));if(d>0&&o.onRun)o.onRun();draw()};
+  root.onclick=e=>{const a=e.target.dataset&&e.target.dataset.a;if(!a)return;
+    if(a==='next'){stop();go(1)}else if(a==='prev'){stop();go(-1)}else if(a==='pause')stop();else if(a==='reset'){stop();i=-1;draw()}
+    else if(a==='run'){stop();if(i>=steps.length-1)i=-1;timer=setInterval(()=>{if(i<steps.length-1)go(1);else stop()},900)}};
+  ta.oninput=compile;ta.onscroll=()=>{hl.scrollTop=ta.scrollTop;hl.scrollLeft=ta.scrollLeft};
+  ta.onkeydown=e=>{if(e.key==='Tab'){e.preventDefault();const s=ta.selectionStart;ta.setRangeText('    ',s,ta.selectionEnd,'end');compile()}};
+  compile()}
+function Exercise(root,id){const e=LESSONS[id].ex;let h=0;
+  root.innerHTML=`<h3>Práctica</h3><p>${e.q}</p>${e.code?`<pre class="code">${esc(e.code)}</pre>`:''}<div class="opts">${e.opts.map((o,k)=>`<button class="b opt" data-k="${k}">${esc(o[0])}</button>`).join('')}</div><div class="fb" aria-live="polite"></div><button class="b" id="hint">💡 Ver pista</button><div class="hint"></div>`;
+  const fb=$('.fb',root);
+  root.onclick=ev=>{const t=ev.target;
+    if(t.id==='hint'){if(h<e.hints.length)$('.hint',root).innerHTML+=`<div>Pista ${h+1}: ${e.hints[h++]}</div>`;if(h>=e.hints.length)t.disabled=true}
+    else if(t.dataset.k!==undefined){const k=+t.dataset.k;
+      if(k===e.ans){const first=!S.done[id];if(first){S.done[id]=1;S.xp+=e.xp;save();upd()}
+        fb.innerHTML=`<p class="ok">✓ ¡Correcto! ${esc(e.opts[k][1])}${first?` (+${e.xp} XP)`:''}</p><b>Paso a paso:</b><ol>${e.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`}
+      else fb.innerHTML=`<p class="bad">✗ Tu respuesta no coincide. ${esc(e.opts[k][1])}</p><button class="b" id="retry">Volver a intentar</button>`}
+    else if(t.id==='retry')fb.innerHTML=''}}
+function upd(){const x=$('#xp');if(x)x.textContent=`⭐ ${S.xp} XP · Nivel ${lvl()}`}
+
+/* ---------- Páginas ---------- */
+const badges=()=>[['🏆','Primer programa',S.ran],['💡','Maestro de variables',S.done.var],['🔁','Experto en ciclos',S.done.for],['🧠','Dominador de POO',S.done.poo]];
+function pHome(){const last=S.last||'var';return`<h1>Aprende Programación de Forma Interactiva</h1><p class="mu">Comprende, practica, experimenta y domina la programación.</p><h3>Hola, ${S.name} 👋</h3>
+ <div class="grid"><div class="card"><h4>Progreso general</h4><div class="big">${pct()}%</div><div class="pb" role="progressbar" aria-valuenow="${pct()}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct()}%"></i></div><span class="mu">${Object.keys(S.done).length} de ${TOTAL} lecciones</span></div>
+ <div class="card"><h4>XP y nivel</h4><div class="big">${S.xp}</div><span class="mu">Nivel ${lvl()}</span></div><div class="card"><h4>Racha</h4><div class="big">🔥 6 días</div><span class="mu">Dato de demostración</span></div>
+ <div class="card"><h4>Insignias</h4>${badges().map(b=>`<div>${b[0]} ${b[1]} — <span class="${b[2]?'ok':'mu'}">${b[2]?'obtenida':'pendiente'}</span></div>`).join('')}</div></div>
+ <div class="card"><h4>Continúa aprendiendo</h4><div class="lrow" style="border:0"><b>${LESSONS[last].title}</b><button class="b p" data-go="${last}">Continuar</button></div></div>
+ <div class="card"><h3>Ruta de aprendizaje</h3>${PATH.map(([m,ls])=>`<h4>${m}</h4>${ls.map(([id,t])=>id?`<div class="lrow"><span>${S.done[id]?'✅':'📘'} ${LESSONS[id].title}</span><button class="b" data-go="${id}">${S.done[id]?'Repasar':'Abrir'}</button></div>`:`<div class="lrow mu"><span>🔒 ${t}</span><span>Próximamente</span></div>`).join('')}`).join('')}</div>`}
+function pLesson(id){const L=LESSONS[id];S.last=id;return`<h1>${L.title}</h1><div class="grid"><div class="card"><h4>Explicación sencilla</h4>${L.explain}</div><div class="card"><h4>Ejemplo de la vida real</h4>${L.real}</div><div class="card"><h4>Explicación técnica</h4>${L.tech}</div></div>
+ <div class="card"><h3>Visualización y código</h3><p class="mu">${L.challenge}</p><div id="player"></div></div><div class="card" id="ex"></div>`}
+function pPractice(){return`<h1>Practicar código</h1><p class="mu">Escribe código C# (variables, if/else, for, while, Console.WriteLine) y obsérvalo paso a paso. Se ejecuta en un intérprete seguro dentro de tu navegador: no accede a archivos ni a la red.</p><div class="card"><div id="player"></div></div>`}
+function pDict(){const q=S.q.toLowerCase(),r=DICT.filter(d=>d.join(' ').toLowerCase().includes(q));return`<h1>Diccionario</h1><p class="mu">${q?`Resultados para «${esc(S.q)}»`:'Conceptos clave de programación'}</p>${r.map(d=>`<div class="card"><h3>${d[0]}</h3><p><b>Sencillo:</b> ${d[1]}</p><p><b>Técnico:</b> ${d[2]}</p><pre class="code">${hi(d[3])}</pre></div>`).join('')||'<div class="card">No se encontraron conceptos. Prueba con otra palabra.</div>'}`}
+
+const LIDS={Condicionales:'cond',Herencia:'her',Polimorfismo:'pol',Interfaces:'int'};PATH.forEach(m=>m[1].forEach(l=>{if(LIDS[l[1]])l[0]=LIDS[l[1]]}));
+const GROUP=[['Ana López',92,'—'],['Jorge Ruiz',74,'Ciclos'],['Marta Díaz',58,'Constructores'],['Luis Pérez',41,'Condicionales'],['Sofía Ramos',85,'Herencia']];
+const WEAK=[['Constructores',68],['Ciclos',52],['Condicionales',37],['Herencia',30]];
+function pTeacher(){return`<h1>Panel del maestro</h1><p class="mu">Datos de demostración. Al conectar un backend mostrará el progreso real de cada grupo.</p>
+ <div class="card"><h3>Grupo POO 3A — progreso por alumno</h3>${GROUP.map(g=>`<div class="lrow"><span>${g[0]}</span><span style="flex:1;max-width:320px"><div class="pb" role="progressbar" aria-valuenow="${g[1]}" aria-valuemin="0" aria-valuemax="100"><i style="width:${g[1]}%"></i></div></span><span>${g[1]}% · <span class="mu">Dificultad: ${g[2]}</span></span></div>`).join('')}</div>
+ <div class="card"><h3>Temas con más dificultad (% de alumnos con errores)</h3>${WEAK.map(w=>`<div>${w[0]} — ${w[1]}%<div class="pb"><i style="width:${w[1]}%"></i></div></div>`).join('')}</div>
+ <div class="card"><h3>Acciones</h3><button class="b" data-go="home">Ver la plataforma como alumno</button> <span class="mu">Crear cursos, tareas y cuestionarios requiere el backend.</span></div>`}
+function render(){stops.forEach(f=>f());stops=[];const v=S.view;
+  document.documentElement.dataset.theme=S.theme;
+  const nav=(k,t)=>`<button class="nav${v===k?' on':''}" data-go="${k}">${t}</button>`;
+  $('#app').innerHTML=`<aside id="side"><h2>{ } Aprende Programación</h2>${nav('home','🏠 Inicio')}${nav('practice','💻 Practicar código')}${nav('dict','📖 Diccionario')}${nav('teacher','👨‍🏫 Panel del maestro')}<small>Mi aprendizaje</small>${Object.keys(LESSONS).map(k=>nav(k,(S.done[k]?'✅ ':'📘 ')+LESSONS[k].title)).join('')}</aside>
+  <div><div class="top"><button class="b" id="menu" aria-label="Abrir menú">☰</button><input id="q" type="search" placeholder="Buscar concepto (ej. constructor)" aria-label="Buscar concepto" value="${esc(S.q)}"><span style="flex:1"></span><span class="chip" id="xp"></span><button class="b" id="theme" aria-label="Cambiar entre modo claro y oscuro">${S.theme==='dark'?'☀️ Claro':'🌙 Oscuro'}</button></div>
+  <main>${v==='home'?pHome():v==='practice'?pPractice():v==='dict'?pDict():v==='teacher'?pTeacher():pLesson(v)}</main></div>`;
+  upd();const pl=$('#player');
+  if(v==='practice')Player(pl,{code:'int edad = 20;\nif (edad >= 18)\n{\n    Console.WriteLine("Mayor de edad");\n}\nelse\n{\n    Console.WriteLine("Menor de edad");\n}',flow:[['Declarar',['decl']],['Condición',['cond']],['Salida',['out']]],onRun:ran});
+  else if(LESSONS[v]){const L=LESSONS[v];Player(pl,{code:L.code,flow:L.flow,script:L.script,onRun:ran});Exercise($('#ex'),v)}
+  save()}
+function ran(){if(!S.ran){S.ran=true;save()}}
+document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;
+  if(t.dataset.go){S.view=t.dataset.go;if(S.view!=='dict')S.q='';render();scrollTo(0,0)}
+  else if(t.id==='theme'){S.theme=S.theme==='dark'?'light':'dark';save();render()}
+  else if(t.id==='menu')$('#side').classList.toggle('open')});
+document.addEventListener('keydown',e=>{if(e.target.id==='q'&&e.key==='Enter'){S.q=e.target.value;S.view='dict';render()}});
+render();
+</script>
+</body>
+</html>
